@@ -1,0 +1,24 @@
+# Environment that produced the reported numbers: one NVIDIA RTX 4090 (24 GB),
+# python 3.11.7.  Versions are the ones the interpreter that ran the experiments
+# actually imported (`module.__version__`), so they are what to match if you want
+# to compare against the paper rather than merely run the code.
+#
+# If you upgrade, move torch and torchvision together.
+#
+torch==2.4.1
+torchvision==0.19.1
+numpy==1.26.4
+scikit-learn==1.2.2
+scipy==1.11.4
+Pillow==10.2.0
+opencv-python==4.10.0.84
+scikit-image==0.22.0
+pandas==2.1.4
+matplotlib==3.8.0
+tqdm==4.65.0
+
+# NOTE ON THE ENCODER PACKAGE
+# ---------------------------
+# The code imports `dinov3.hub.backbones.load_dinov3_model`.  That package is the
+# official DINOv3 repository and is NOT on PyPI, so it is deliberately absent
+# from the list above.  See README section 3.2 for how to obtain it.

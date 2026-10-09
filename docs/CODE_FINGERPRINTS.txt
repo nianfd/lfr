@@ -1,0 +1,91 @@
+CODE FINGERPRINTS
+=================
+
+MD5 of every shipped file.  The claim "the released code is the code
+that ran" is worth exactly as much as your ability to check it, so
+every runtime module is listed with the md5 it had on the training
+box.  Verify the whole tree with:
+
+    md5sum -c docs/md5sums.txt
+
+Status key
+----------
+FROZEN
+    byte-identical to the file on the training box that produced the
+    numbers in the paper.  The md5 below is simultaneously the shipped
+    file and the historical file, so the identity is checkable with
+    `md5sum -c docs/md5sums.txt`.
+DRIVER
+    the portable shell drivers written for this release.  They are new
+    code: their job is to issue the same command lines the paper ran,
+    with the machine-specific paths lifted into environment variables.
+    They contain no arithmetic of their own -- every number in the paper
+    comes from curvot_rad.py.
+HARNESS
+    a standalone test harness that existed only on the development
+    machine.  It imports curvot_utils.py, so it exercises the FROZEN
+    module shipped here; there is no historical md5 to compare against.
+EDIT
+    a packaging edit, and the only one.  tools/dump_defaults.py carried the
+    training box's absolute path; the edit is marked in the source with a
+    "PACKAGING EDIT" banner.  It changes where the tool reads and writes,
+    nothing about what it computes.
+DATA
+    reference data rather than code: the published RAD reference column of
+    the Real-IAD comparison, with its provenance recorded inside the file.
+    It is not measured here and is never mixed into our own columns.
+ASSET
+    figure and table sources for this README and for the manuscript.
+GLUE
+    packaging files: requirements, ignore rules, the README, these notes,
+    and this generator.
+
+md5                                status   path
+---------------------------------- -------- ----
+04a3229f39a5e40e066c27b394b39276   GLUE     .gitignore
+e9208f7e5282e3d4fac013cae12a91ed   GLUE     README.md
+268235ac4dc287a94bfe55009b1d1942   FROZEN   bank_builder_disk.py
+f5e494f11c94c1daac42354f79bba73b   FROZEN   baseline_scores.py
+23eaf001ea188c60ef9ada78d558c29f   HARNESS  bench_window_fast.py
+987c3dbd9722eba052a659917a459210   FROZEN   build_bank_multilayer.py
+3f52ff668ba54a98729e07f591006df4   FROZEN   build_realiad_bank_multilayer.py
+054601b61cad9d3004b93f2f162e2bf8   FROZEN   cu_ref.py
+a6db3855c2070f107ef6985434029e34   FROZEN   curvot_rad.py
+ca16e42a25754a6d7b342fbc9d137290   FROZEN   curvot_utils.py
+bd901630c758d0c627747a693ef1b988   FROZEN   dataset.py
+fde465ac93baaf62fe1c26f5173ead4a   GLUE     docs/RELEASE_NOTES.md
+7f5503b312dc63705acb950f3cfaedcb   ASSET    docs/main_results.tex
+81906e1a48ec4968363a02452781ee4b   ASSET    figures/framework.png
+53ce51f7a627395875bc9d32e0b0c368   FROZEN   rad_mvtec_visa_3dadam.py
+4bc0f0209c97bbacf64a17db6218b3eb   DATA     refs/rad_realiad_ab.json
+b2ade42c09a09544d1ce44534773a2b3   GLUE     requirements.txt
+40f5230ba350cea4d79a5fd1c6bf3a45   FROZEN   ri_launch_curvot_rad.py
+35bf9d12a239a407981e6c1fbb941df5   FROZEN   ri_sharedbank.py
+aafad8dac2d979d33f1f5895199c1e32   DRIVER   scripts/build_banks.sh
+b18141aa0d6d4f306bc4c7a4dc0257fe   DRIVER   scripts/common.sh
+e94c5aceffa74c2669bad0e08b692776   DRIVER   scripts/make_tables.sh
+0c0ab91d0d88f4451f8c74669dd471f2   DRIVER   scripts/run_beta_sweep.sh
+7cd2d8ac4a95f2b2522380c347f7a236   DRIVER   scripts/run_main_table.sh
+63da21c2aad242c1f3c8cc17d79c1a6c   DRIVER   scripts/run_matched_baselines.sh
+e24dde31a898e3b1f67c4f240ecb79d4   DRIVER   scripts/run_radius_ablation.sh
+9f1cb803059ae5d7f4b840e8b54c655c   DRIVER   scripts/run_realiad_rho4.sh
+0688dd846a46ef6056c4661caf99efe3   FROZEN   test_baselines.py
+b3b6e8e32e004aff7bc1c36e178e8bf2   FROZEN   test_unbounded_equiv.py
+94259a5473d98fa2417d90001f8ebb00   HARNESS  test_window_fast.py
+8440412dd951df3b751555a68b07dd47   FROZEN   tools/bd_equiv.py
+f3e35178aecf574d0fb53dfd4c7d392e   FROZEN   tools/bd_gapchk.py
+74513d0d5bedb43d8e5e8cc04221845a   FROZEN   tools/bd_table.py
+d35b70ef7699b330743b20e3a47fee95   EDIT     tools/dump_defaults.py
+858228ff246fdbefcdda3b38ec5f01d9   FROZEN   tools/lint_py311.py
+c39fb3d8c939ce3f60c9a4cb2a1e8a86   GLUE     tools/make_fingerprints.py
+5c51c7d32508d2671a20ee6aad982932   FROZEN   tools/p_fastwin_diff.py
+0cfd49d21198974fd5d31ef58381a00c   FROZEN   tools/rd_beta_table.py
+cc7a284ace9deb862cfeb22fc7236fc0   FROZEN   tools/rd_radius_perclass.py
+9adb25c91057bfd4562c59236ad9d31d   FROZEN   tools/rd_radius_table.py
+d1883f3a2e1ca227f13be97c82a66a21   FROZEN   tools/ri_table_rho4.py
+5d304fa901c06e6e91bb8a2dcc878e8f   FROZEN   tools/test_beta_table.py
+9854e9fe31b459b5bc6ec8ec6678e3a3   FROZEN   utils.py
+
+FROZEN files: 24 of 43 listed
+md5 of tools/dump_defaults.py before the packaging edit: db4e23aa2e1d5a9633a35e2a8a294744
+
